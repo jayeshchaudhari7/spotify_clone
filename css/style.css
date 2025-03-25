@@ -83,6 +83,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: rgb(34 34 34);
+    height: 85px;
 }
 
 .header>* {

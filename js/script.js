@@ -19,7 +19,7 @@ function secondsToMinutesSeconds(seconds) {
 
 async function getSongs(folder) {
     currFolder = folder;
-    let a = await fetch(`/${folder}/`)
+    let a = await fetch(`http://127.0.0.1:5500/${folder}/`)
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -28,7 +28,7 @@ async function getSongs(folder) {
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split(`/${folder}/`)[1])
+            songs.push(element.href.split(`http://127.0.0.1:5500/${folder}`)[1])
         }
     }
  
@@ -48,7 +48,6 @@ async function getSongs(folder) {
                                 <img class="invert" src="img/play.svg" alt="">
                             </div> </li>`;
     }
-
     // Attach an event listener to each song
     Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
         e.addEventListener("click", element => {
@@ -59,6 +58,7 @@ async function getSongs(folder) {
 
     return songs
 }
+
 
 const playMusic = (track, pause = false) => {
     currentSong.src = `/${currFolder}/` + track
@@ -126,7 +126,7 @@ async function main() {
 
     // Attach an event listener to play, next and previous
     play.addEventListener("click", () => {
-        if (currentSong.paused) {
+        if (currentSong.paused) { 
             currentSong.play()
             play.src = "img/pause.svg"
         }
@@ -203,10 +203,6 @@ async function main() {
         }
 
     })
-
-
-
-
 
 }
 
